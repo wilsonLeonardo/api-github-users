@@ -1,0 +1,68 @@
+/github/{user}:
+   get:
+      summary: Find a user and their information on GitHub
+      parameters: 
+        - in: path
+          name: user
+          schema:
+            type: string
+          required: true
+          description: User username
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    username:
+                      type: string
+                    organization:
+                      type: string
+                    location:
+                      type: string
+                    email:
+                      type: string
+                    website:
+                      type: string
+                    twitter:
+                      type: string
+                    repositories:
+                      type: array
+                      items: 
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          fullName:
+                            type: string
+                          description:
+                            type: string
+                          htmlUrl:
+                            type: string
+                          stars:
+                            type: integer
+                          updatedAt:
+                            type: string
+
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                  type: object
+                  properties:
+                    error:
+                      type: array
+                      items: 
+                        type: object
+                        properties:
+                          message:
+                            type: string
+      tags:
+        - GitHub
+      security:
+        - bearerAuth: []

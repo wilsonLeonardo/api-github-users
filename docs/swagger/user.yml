@@ -1,0 +1,144 @@
+/user:
+  post:
+    tags:
+      - Users
+    security: []
+    summary: Create user
+    requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: 
+                name:
+                  type: string
+                  required: true
+                email:
+                  type: string
+                  required: true
+                password:
+                  type: string
+                  required: true
+    produces:
+      - application/json
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  token:
+                    type: object  
+                    properties: 
+                      type:
+                        type: string  
+                      token:
+                        type: string  
+                      expires_at:
+                        type: string  
+  get:
+    tags:
+      - Users
+    security: 
+      - bearerAuth: []
+    summary: Get the logged user
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+      401:
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  error:
+                    type: array
+                    items: 
+                      type: object
+                      properties:
+                        message:
+                          type: string
+
+
+/login:
+  post:
+    tags:
+      - Login
+    security: []
+    summary: Login user
+    requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: 
+                email:
+                  type: string
+                  required: true
+                password:
+                  type: string
+                  required: true
+    produces:
+      - application/json
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  token:
+                    type: object  
+                    properties: 
+                      type:
+                        type: string  
+                      token:
+                        type: string  
+                      expires_at:
+                        type: string  
+      401:
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+                  code:
+                    type: integer
+                    example: 401
